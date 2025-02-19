@@ -1,0 +1,983 @@
+{
+  "code": 200,
+  "data": [
+    {
+      "path": "/home/index",
+      "name": "home",
+      "component": "/home/index",
+      "meta": {
+        "icon": "HomeFilled",
+        "title": "首页",
+        "isLink": "",
+        "isHide": false,
+        "isFull": false,
+        "isAffix": true,
+        "isKeepAlive": true
+      }
+    },
+    {
+      "path": "/leader",
+      "name": "leader",
+      "component": "/leader/index",
+      "meta": {
+        "icon": "Histogram",
+        "title": "领导者驾驶舱",
+        "isLink": "",
+        "isHide": true,
+        "isFull": false,
+        "isAffix": false,
+        "isKeepAlive": true
+      }
+    },
+    {
+      "path": "/dataScreen",
+      "name": "dataScreen",
+      "component": "/dataScreen/index",
+      "meta": {
+        "icon": "Histogram",
+        "title": "数据大屏",
+        "isLink": "",
+        "isHide": false,
+        "isFull": true,
+        "isAffix": false,
+        "isKeepAlive": true
+      }
+    },
+    {
+      "path": "/market",
+      "name": "market",
+      "meta": {
+        "icon": "MessageBox",
+        "title": "市场开发",
+        "isLink": "",
+        "isHide": false,
+        "isFull": false,
+        "isAffix": false,
+        "isKeepAlive": true
+      },
+      "children": [
+        {
+          "path": "/event",
+          "name": "event",
+          "meta": {
+            "icon": "Menu",
+            "title": "事件录入",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          },
+          "children": [
+            {
+              "path": "/market/markTable",
+              "name": "markTable",
+              "component": "/market/markTable",
+              "meta": {
+                "icon": "Menu",
+                "title": "市场营销",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            },
+            {
+              "path": "/market/techTable",
+              "name": "techTable",
+              "component": "/market/techTable",
+              "meta": {
+                "icon": "Menu",
+                "title": "技术宣讲",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            },
+            {
+              "path": "/market/bidTable",
+              "name": "bidTable",
+              "component": "/market/bidTable",
+              "meta": {
+                "icon": "Menu",
+                "title": "投标统计",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            },
+            {
+              "path": "/market/newSignTable",
+              "name": "newSignTable",
+              "component": "/market/newSignTable",
+              "meta": {
+                "icon": "Menu",
+                "title": "新签市场",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            },
+            {
+              "path": "/market/potProjectTable",
+              "name": "potProjectTable",
+              "component": "/market/potProjectTable",
+              "meta": {
+                "icon": "Menu",
+                "title": "潜在项目",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            }
+          ]
+        },
+        {
+          "path": "/market/montotal",
+          "name": "montotal",
+          "component": "/market/montotal",
+          "meta": {
+            "icon": "Menu",
+            "title": "月度汇总",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        },
+        {
+          "path": "/market/maranaly",
+          "name": "maranaly",
+          "component": "/market/maranaly",
+          "meta": {
+            "icon": "Menu",
+            "title": "市场分析",
+            "isLink": "",
+            "isHide": true,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        }
+      ]
+    },
+    {
+      "path": "/contract",
+      "name": "contract",
+      "meta": {
+        "icon": "MessageBox",
+        "title": "合同管理",
+        "isLink": "",
+        "isHide": false,
+        "isFull": false,
+        "isAffix": false,
+        "isKeepAlive": true
+      },
+      "children": [
+        {
+          "path": "/contractevent",
+          "name": "contractevent",
+          "meta": {
+            "icon": "Menu",
+            "title": "合同录入",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          },
+          "children": [
+            {
+              "path": "/contract/infilingTable",
+              "name": "infilingTable",
+              "component": "/contract/infilingTable",
+              "meta": {
+                "icon": "Menu",
+                "title": "收入合同",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            },
+            {
+              "path": "/contract/outfilingTable",
+              "name": "outfilingTable",
+              "component": "/contract/outfilingTable",
+              "meta": {
+                "icon": "Menu",
+                "title": "支出合同",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            }
+          ]
+        },
+        {
+          "path": "/contract/manageTable",
+          "name": "manageTable",
+          "component": "/contract/manageTable",
+          "meta": {
+            "icon": "Menu",
+            "title": "合同信息",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        }
+      ]
+    },
+    {
+      "path": "/driver",
+      "name": "driver",
+      "meta": {
+        "icon": "MessageBox",
+        "title": "驾驶舱信息录入",
+        "isLink": "",
+        "isHide": false,
+        "isFull": false,
+        "isAffix": false,
+        "isKeepAlive": true
+      },
+      "children": [
+        {
+          "path": "/driver/leadVisits",
+          "name": "leadVisits",
+          "component": "/driver/leadVisits",
+          "meta": {
+            "icon": "Menu",
+            "title": "海外领导出访立项",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        },
+        {
+          "path": "/driver/marketConditions",
+          "name": "marketConditions",
+          "component": "/driver/marketConditions",
+          "meta": {
+            "icon": "Menu",
+            "title": "累计完成进度",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        }
+      ]
+    },
+    {
+      "path": "/branchCenter",
+      "name": "branchCenter",
+      "component": "/branchCenter",
+      "meta": {
+        "icon": "MessageBox",
+        "title": "分中心",
+        "isLink": "",
+        "isHide": false,
+        "isFull": false,
+        "isAffix": false,
+        "isKeepAlive": true
+      },
+      "children": [
+        {
+          "path": "/branchCenter/AbuDhabi",
+          "name": "AbuDhabi",
+          "meta": {
+            "icon": "Menu",
+            "title": "阿布扎比研究中心",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          },
+          "children":[
+            {
+              "path": "/branchCenter/AbuDhabi/AbuDhabiInfo",
+              "name": "AbuDhabiInfo",
+              "component": "/branchCenter/AbuDhabi/AbuDhabiInfo",
+              "meta": {
+                "icon": "Menu",
+                "title": "分中心信息",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            },
+            {
+              "path": "/branchCenter/AbuDhabi/AbuDhabiProject",
+              "name": "AbuDhabiProject",
+              "component": "/branchCenter/AbuDhabi/AbuDhabiProject",
+              "meta": {
+                "icon": "Menu",
+                "title": "项目信息",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            }
+          ]
+        },
+        {
+          "path": "/branchCenter/AIYasat",
+          "name": "AIYasat",
+          "meta": {
+            "icon": "Menu",
+            "title": "AI Yasat技术支持中心",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          },
+          "children":[
+            {
+              "path": "/branchCenter/AIYasat/AIYasatInfo",
+              "name": "AIYasatInfo",
+              "component": "/branchCenter/AIYasat/AIYasatInfo",
+              "meta": {
+                "icon": "Menu",
+                "title": "分中心信息",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            },
+            {
+              "path": "/branchCenter/AIYasat/AIYasatProject",
+              "name": "AIYasatProject",
+              "component": "/branchCenter/AIYasat/AIYasatProject",
+              "meta": {
+                "icon": "Menu",
+                "title": "项目信息",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            }
+          ]
+        },
+        {
+          "path": "/branchCenter/Kuwait",
+          "name": "Kuwait",
+          "meta": {
+            "icon": "Menu",
+            "title": "科威特研究中心",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          },
+          "children":[
+            {
+              "path": "/branchCenter/Kuwait/KuwaitInfo",
+              "name": "KuwaitInfo",
+              "component": "/branchCenter/Kuwait/KuwaitInfo",
+              "meta": {
+                "icon": "Menu",
+                "title": "分中心信息",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            },
+            {
+              "path": "/branchCenter/Kuwait/KuwaitProject",
+              "name": "KuwaitProject",
+              "component": "/branchCenter/Kuwait/KuwaitProject",
+              "meta": {
+                "icon": "Menu",
+                "title": "项目信息",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            }
+          ]
+        },
+        {
+          "path": "/branchCenter/Pakistan",
+          "name": "Pakistan",
+          "meta": {
+            "icon": "Menu",
+            "title": "巴基斯坦研究中心",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          },
+          "children":[
+            {
+              "path": "/branchCenter/Pakistan/PakistanInfo",
+              "name": "PakistanInfo",
+              "component": "/branchCenter/Pakistan/PakistanInfo",
+              "meta": {
+                "icon": "Menu",
+                "title": "分中心信息",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            },
+            {
+              "path": "/branchCenter/Pakistan/PakistanProject",
+              "name": "PakistanProject",
+              "component": "/branchCenter/Pakistan/PakistanProject",
+              "meta": {
+                "icon": "Menu",
+                "title": "项目信息",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            }
+          ]
+        },
+        {
+          "path": "/branchCenter/SoutheastAsia",
+          "name": "SoutheastAsia",
+          "meta": {
+            "icon": "Menu",
+            "title": "东南亚研究中心",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          },
+          "children":[
+            {
+              "path": "/branchCenter/SoutheastAsia/SoutheastAsiaInfo",
+              "name": "SoutheastAsiaInfo",
+              "component": "/branchCenter/SoutheastAsia/SoutheastAsiaInfo",
+              "meta": {
+                "icon": "Menu",
+                "title": "分中心信息",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            },
+            {
+              "path": "/branchCenter/SoutheastAsia/SoutheastAsiaProject",
+              "name": "SoutheastAsiaProject",
+              "component": "/branchCenter/SoutheastAsia/SoutheastAsiaProject",
+              "meta": {
+                "icon": "Menu",
+                "title": "项目信息",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            }
+          ]
+        },
+        {
+          "path": "/branchCenter/KZAMG",
+          "name": "KZAMG",
+          "meta": {
+            "icon": "Menu",
+            "title": "哈萨克斯坦研究中心（AMG）",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          },
+          "children":[
+            {
+              "path": "/branchCenter/KZAMG/KZAMGInfo",
+              "name": "KZAMGInfo",
+              "component": "/branchCenter/KZAMG/KZAMGInfo",
+              "meta": {
+                "icon": "Menu",
+                "title": "分中心信息",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            },
+            {
+              "path": "/branchCenter/KZAMG/KZAMGProject",
+              "name": "KZAMGProject",
+              "component": "/branchCenter/KZAMG/KZAMGProject",
+              "meta": {
+                "icon": "Menu",
+                "title": "项目信息",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            }
+          ]
+        },
+        {
+          "path": "/branchCenter/KZPKKR",
+          "name": "KZPKKR",
+          "meta": {
+            "icon": "Menu",
+            "title": "哈萨克斯坦研究中心（PKKR）",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          },
+          "children":[
+            {
+              "path": "/branchCenter/KZPKKR/KZPKKRInfo",
+              "name": "KZPKKRInfo",
+              "component": "/branchCenter/KZPKKR/KZPKKRInfo",
+              "meta": {
+                "icon": "Menu",
+                "title": "分中心信息",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            },
+            {
+              "path": "/branchCenter/KZPKKR/KZPKKRProject",
+              "name": "KZPKKRProject",
+              "component": "/branchCenter/KZPKKR/KZPKKRProject",
+              "meta": {
+                "icon": "Menu",
+                "title": "项目信息",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            }
+          ]
+        },
+        {
+          "path": "/branchCenter/AlmaAta",
+          "name": "AlmaAta",
+          "meta": {
+            "icon": "Menu",
+            "title": "哈萨克斯坦阿拉木图研究中心（ALM）",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          },
+          "children":[
+            {
+              "path": "/branchCenter/AlmaAta/AlmaAtaInfo",
+              "name": "AlmaAtaInfo",
+              "component": "/branchCenter/AlmaAta/AlmaAtaInfo",
+              "meta": {
+                "icon": "Menu",
+                "title": "分中心信息",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            },
+            {
+              "path": "/branchCenter/AlmaAta/AlmaAtaProject",
+              "name": "AlmaAtaProject",
+              "component": "/branchCenter/AlmaAta/AlmaAtaProject",
+              "meta": {
+                "icon": "Menu",
+                "title": "项目信息",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            }
+          ]
+        },
+        {
+          "path": "/branchCenter/Algeria",
+          "name": "Algeria",
+          "meta": {
+            "icon": "Menu",
+            "title": "阿尔及利亚研究中心",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          },
+          "children":[
+            {
+              "path": "/branchCenter/Algeria/AlgeriaInfo",
+              "name": "AlgeriaInfo",
+              "component": "/branchCenter/Algeria/AlgeriaInfo",
+              "meta": {
+                "icon": "Menu",
+                "title": "分中心信息",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            },
+            {
+              "path": "/branchCenter/Algeria/AlgeriaProject",
+              "name": "AlgeriaProject",
+              "component": "/branchCenter/Algeria/AlgeriaProject",
+              "meta": {
+                "icon": "Menu",
+                "title": "项目信息",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            }
+          ]
+        },
+        {
+          "path": "/branchCenter/Libya",
+          "name": "Libya",
+          "meta": {
+            "icon": "Menu",
+            "title": "利比亚研究中心",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          },
+          "children":[
+            {
+              "path": "/branchCenter/Libya/LibyaInfo",
+              "name": "LibyaInfo",
+              "component": "/branchCenter/Libya/LibyaInfo",
+              "meta": {
+                "icon": "Menu",
+                "title": "分中心信息",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            },
+            {
+              "path": "/branchCenter/Libya/LibyaProject",
+              "name": "LibyaProject",
+              "component": "/branchCenter/Libya/LibyaProject",
+              "meta": {
+                "icon": "Menu",
+                "title": "项目信息",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            }
+          ]
+        },
+        {
+          "path": "/branchCenter/Niger",
+          "name": "Niger",
+          "meta": {
+            "icon": "Menu",
+            "title": "尼日尔研究中心",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          },
+          "children":[
+            {
+              "path": "/branchCenter/Niger/NigerInfo",
+              "name": "NigerInfo",
+              "component": "/branchCenter/Niger/NigerInfo",
+              "meta": {
+                "icon": "Menu",
+                "title": "分中心信息",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            },
+            {
+              "path": "/branchCenter/Niger/NigerProject",
+              "name": "NigerProject",
+              "component": "/branchCenter/Niger/NigerProject",
+              "meta": {
+                "icon": "Menu",
+                "title": "项目信息",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            }
+          ]
+        },
+        {
+          "path": "/branchCenter/Chad",
+          "name": "Chad",
+          "meta": {
+            "icon": "Menu",
+            "title": "乍得研究中心",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          },
+          "children":[
+            {
+              "path": "/branchCenter/Chad/ChadInfo",
+              "name": "ChadInfo",
+              "component": "/branchCenter/Chad/ChadInfo",
+              "meta": {
+                "icon": "Menu",
+                "title": "分中心信息",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            },
+            {
+              "path": "/branchCenter/Chad/ChadProject",
+              "name": "ChadProject",
+              "component": "/branchCenter/Chad/ChadProject",
+              "meta": {
+                "icon": "Menu",
+                "title": "项目信息",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            }
+          ]
+        },
+        {
+          "path": "/branchCenter/Nigeria",
+          "name": "Nigeria",
+          "meta": {
+            "icon": "Menu",
+            "title": "尼日利亚研究中心",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          },
+          "children":[
+            {
+              "path": "/branchCenter/Nigeria/NigeriaInfo",
+              "name": "NigeriaInfo",
+              "component": "/branchCenter/Nigeria/NigeriaInfo",
+              "meta": {
+                "icon": "Menu",
+                "title": "分中心信息",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            },
+            {
+              "path": "/branchCenter/Nigeria/NigeriaProject",
+              "name": "NigeriaProject",
+              "component": "/branchCenter/Nigeria/NigeriaProject",
+              "meta": {
+                "icon": "Menu",
+                "title": "项目信息",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            }
+          ]
+        },
+        {
+          "path": "/branchCenter/SouthAmerica",
+          "name": "SouthAmerica",
+          "meta": {
+            "icon": "Menu",
+            "title": "南美研究中心",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          },
+          "children":[
+            {
+              "path": "/branchCenter/SouthAmerica/SouthAmericaInfo",
+              "name": "SouthAmericaInfo",
+              "component": "/branchCenter/SouthAmerica/SouthAmericaInfo",
+              "meta": {
+                "icon": "Menu",
+                "title": "分中心信息",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            },
+            {
+              "path": "/branchCenter/SouthAmerica/SouthAmericaProject",
+              "name": "SouthAmericaProject",
+              "component": "/branchCenter/SouthAmerica/SouthAmericaProject",
+              "meta": {
+                "icon": "Menu",
+                "title": "项目信息",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/proTable",
+      "name": "proTable",
+      "redirect": "/proTable/useProTable",
+      "meta": {
+        "icon": "MessageBox",
+        "title": "超级表格",
+        "isLink": "",
+        "isHide": true,
+        "isFull": false,
+        "isAffix": false,
+        "isKeepAlive": true
+      },
+      "children": [
+        {
+          "path": "/proTable/useProTable",
+          "name": "useProTable",
+          "component": "/proTable/useProTable/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "使用 ProTable",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        }
+      ]
+    },
+    {
+      "path": "/authority",
+      "name": "authority",
+      "redirect": "/authority",
+      "meta": {
+        "icon": "MessageBox",
+        "title": "权限管理",
+        "isLink": "",
+        "isHide": true,
+        "isFull": false,
+        "isAffix": false,
+        "isKeepAlive": true
+      },
+      "children": [
+        {
+          "path": "/authority/roleManagement",
+          "name": "roleManagement",
+          "component": "/authority/roleManagement",
+          "meta": {
+            "icon": "Menu",
+            "title": "角色管理",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        },
+        {
+          "path": "/authority/userManagement",
+          "name": "userManagement",
+          "component": "/authority/userManagement",
+          "meta": {
+            "icon": "Menu",
+            "title": "用户管理",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        }
+      ]
+    }
+  ],
+  "msg": "成功"
+}

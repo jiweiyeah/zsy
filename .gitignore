@@ -1,0 +1,42 @@
+# IDE 和编辑器文件
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# 依赖目录
+node_modules/
+vendor/
+venv/
+env/
+.env
+
+# 编译输出
+dist/
+build/
+*.pyc
+__pycache__/
+*.class
+bin/
+obj/
+
+# 日志文件
+*.log
+logs/
+npm-debug.log*
+
+# 本地配置文件
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# 临时文件
+tmp/
+temp/
+.cache/
+
+# 系统文件
+Thumbs.db
+.DS_Store
