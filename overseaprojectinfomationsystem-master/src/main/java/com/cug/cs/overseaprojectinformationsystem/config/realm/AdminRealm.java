@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import com.cug.cs.overseaprojectinformationsystem.shiro.JwtToken;
 import com.cug.cs.overseaprojectinformationsystem.util.JwtUtil;
+import com.cug.cs.overseaprojectinformationsystem.constant.RoleConstants;
 
 /**
  * @description: TODO 提供信息：授权信息与认证信息（管理员）
@@ -68,11 +69,24 @@ public class AdminRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        // 从JWT中获取用户信息，并设置用户权限
+        String token = (String) principals.getPrimaryPrincipal();
+        String role = JwtUtil.getRole(token);
+        
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        // 设置角色和权限
-        // info.addRole("admin");
-        // info.addStringPermission("user:view");
+        
+        if (RoleConstants.ROLE_ADMIN.equals(role)) {
+            // 管理员角色
+            info.addRole(RoleConstants.ROLE_ADMIN);
+            info.addStringPermission(RoleConstants.PERMISSION_ADMIN_ALL);
+            info.addStringPermission(RoleConstants.PERMISSION_USER_VIEW);
+            info.addStringPermission(RoleConstants.PERMISSION_USER_EDIT);
+            info.addStringPermission(RoleConstants.PERMISSION_USER_DELETE);
+        } else if (RoleConstants.ROLE_USER.equals(role)) {
+            // 普通用户角色
+            info.addRole(RoleConstants.ROLE_USER);
+            info.addStringPermission(RoleConstants.PERMISSION_USER_VIEW);
+        }
+        
         return info;
     }
 }

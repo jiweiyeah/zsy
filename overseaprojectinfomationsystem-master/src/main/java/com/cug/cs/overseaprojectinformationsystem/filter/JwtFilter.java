@@ -33,9 +33,11 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
                 return executeLogin(request, response);
             } catch (Exception e) {
                 responseError(response);
+                return false;
             }
         }
-        return true;
+        responseError(response);
+        return false;
     }
     
     /**

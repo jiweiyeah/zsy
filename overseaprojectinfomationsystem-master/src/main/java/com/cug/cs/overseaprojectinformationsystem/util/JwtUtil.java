@@ -12,11 +12,12 @@ public class JwtUtil {
     private static final long EXPIRE_TIME = 24 * 60 * 60 * 1000; // 24小时
     private static final String SECRET = "your_secret_key"; // 密钥
 
-    public static String createToken(String username) {
+    public static String createToken(String username, String role) {
         Date date = new Date(System.currentTimeMillis() + EXPIRE_TIME);
         Algorithm algorithm = Algorithm.HMAC256(SECRET);
         return JWT.create()
                 .withClaim("username", username)
+                .withClaim("role", role)
                 .withExpiresAt(date)
                 .sign(algorithm);
     }
@@ -36,6 +37,15 @@ public class JwtUtil {
         try {
             DecodedJWT jwt = JWT.decode(token);
             return jwt.getClaim("username").asString();
+        } catch (JWTDecodeException e) {
+            return null;
+        }
+    }
+
+    public static String getRole(String token) {
+        try {
+            DecodedJWT jwt = JWT.decode(token);
+            return jwt.getClaim("role").asString();
         } catch (JWTDecodeException e) {
             return null;
         }

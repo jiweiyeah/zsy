@@ -52,7 +52,9 @@ public class ShiroConfiguration {
         // 允许匿名访问的接口
         filterRuleMap.put("/auth/login", "anon");
         filterRuleMap.put("/auth/register", "anon");
-        filterRuleMap.put("/auth/test", "jwt");  // 明确指定需要JWT验证的接口
+        // 需要角色验证的接口
+        filterRuleMap.put("/auth/admin/**", "jwt,roles[admin]");  // 添加角色验证
+        filterRuleMap.put("/auth/user/**", "jwt");  // 普通接口只需要验证token
         // 其他所有请求通过JWT过滤器
         filterRuleMap.put("/**", "jwt");
         
