@@ -8,11 +8,10 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.cug.cs.overseaprojectinformationsystem.shiro.JwtToken;
+import com.cug.cs.overseaprojectinformationsystem.util.JwtUtil;
 
 /**
  * @description: TODO 提供信息：授权信息与认证信息（管理员）
@@ -35,22 +34,30 @@ public class AdminRealm extends AuthorizingRealm {
      * @author huangshenghui
      */
     @Override
+    public boolean supports(AuthenticationToken token) {
+        return token instanceof JwtToken;
+    }
+
+    @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        /*String username = (String) token.getPrincipal();
-        // TODO 验证token合法性 如果验证通过，可以从jwt中获取用户信息（用户名，角色）
-        MarketAdminExample marketAdminExample = new MarketAdminExample();
-        marketAdminExample.createCriteria().andUsernameEqualTo(username);
-        List<MarketAdmin> marketAdmins = marketAdminMapper.selectByExample(marketAdminExample);
-        if (marketAdmins.size() == 1) {
-            // 说明数据库中有与之对应的数据存在
-            MarketAdmin marketAdmin = marketAdmins.get(0);
-            
-            // 构造认证信息时, 可以放入需要的用户信息, 放入的用户信息, 可以作为 Principals
-            // 放入这个信息是为了取出
-            // 第二个参数是 Credentials, 是真实的密码, 会和 AuthenticationToken 中的 password 做比较
-            return new SimpleAuthenticationInfo(marketAdmin, marketAdmin.getPassword(), getName());
-        }*/
-        return null;
+        String jwt = (String) token.getPrincipal();
+        if (jwt == null) {
+            throw new AuthenticationException("token不能为空");
+        }
+        
+        // 验证JWT的有效性
+        try {
+            if (!JwtUtil.verify(jwt)) {
+                throw new AuthenticationException("token验证失败");
+            }
+            String username = JwtUtil.getUsername(jwt);
+            if (username == null) {
+                throw new AuthenticationException("token中无用户信息");
+            }
+            return new SimpleAuthenticationInfo(jwt, jwt, getName());
+        } catch (Exception e) {
+            throw new AuthenticationException("token验证失败: " + e.getMessage());
+        }
     }
     
     /**
@@ -61,30 +68,11 @@ public class AdminRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        // 先获得 Principal 信息
-       /* MarketAdmin primaryPrincipal = ((MarketAdmin) principals.getPrimaryPrincipal());
-        // 根据用户信息查询出对应的权限列表
-        // 用 MyBatis 查询用户的 roleIds
-        MarketAdminExample marketAdminExample = new MarketAdminExample();
-        marketAdminExample.createCriteria().andUsernameEqualTo(primaryPrincipal.getUsername());
-        MarketAdmin marketAdmin = marketAdminMapper.selectByExample(marketAdminExample).get(0);
-        
-        Integer[] roleIds = marketAdmin.getRoleIds();
-        // 通过 roleId 查询角色所有的权限
-        List<String> permissions = new ArrayList<>();
-        for (Integer roleId : roleIds) {
-            MarketPermissionExample marketPermissionExample = new MarketPermissionExample();
-            marketPermissionExample.createCriteria().andRoleIdEqualTo(roleId);
-            List<MarketPermission> marketPermissions = marketPermissionMapper.selectByExample(marketPermissionExample);
-            for (MarketPermission marketPermission : marketPermissions) {
-                permissions.add(marketPermission.getPermission());
-            }
-        }*/
-        
-        // List<String> permissions = Arrays.asList("aaa");
-        // List<String> permissions = Arrays.asList(roleIds);
-        SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
-        // simpleAuthorizationInfo.addStringPermissions(permissions);
-        return simpleAuthorizationInfo;
+        // 从JWT中获取用户信息，并设置用户权限
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+        // 设置角色和权限
+        // info.addRole("admin");
+        // info.addStringPermission("user:view");
+        return info;
     }
 }

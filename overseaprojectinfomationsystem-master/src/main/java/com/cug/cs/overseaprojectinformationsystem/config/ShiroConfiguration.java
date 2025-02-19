@@ -16,6 +16,7 @@ import javax.servlet.Filter;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * @description: TODO
@@ -41,49 +42,21 @@ public class ShiroConfiguration {
         ShiroFilterFactoryBean filterFactoryBean = new ShiroFilterFactoryBean();
         filterFactoryBean.setSecurityManager(securityManager);
     
+        // 添加自定义过滤器
+        Map<String, Filter> filterMap = new HashMap<>();
+        filterMap.put("jwt", new JwtFilter());
+        filterFactoryBean.setFilters(filterMap);
     
-        // 提供 Filter 链, 配置的内容类似于之前的 HandlerInterceptor
-        // 1: Filter 是谁: anon, authc, perms
-        // 2: Filter 的作用: 建立 url 请求和 Filter 之间的映射关系
-        // 3: Filter 之间的顺序: 书写顺序, 通常 anon <- authc <- perms, anon 写在最前面
-    
-        // 保证 map 中的值是有序的
-        LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-        // map 中的 key   -> 请求 url
-        // map 中的 value -> filter 名称
-        // TODO 需要修改请求路径
-        filterChainDefinitionMap.put("/user/login", "anon");
-        filterChainDefinitionMap.put("/user/logout", "anon");
-        filterChainDefinitionMap.put("/user/kaptcha", "anon");
-        //filterChainDefinitionMap.put("/admin/auth/info", "anon");
-        // filterChainDefinitionMap.put("/admin/auth/noAuthc", "anon");
-        // filterChainDefinitionMap.put("/admin/user/list", "anon");
-    
-        // filterChainDefinitionMap.put("/wx/auth/login", "anon");
-        // filterChainDefinitionMap.put("/wx/auth/logout", "anon");
-    
-        // 访问 /admin/user/list 需要的是 aaa 这个权限
-        // 通常不这样写, 增加权限通常指的 url -> 对 handler 方法做访问控制
-        // 耦合 handler 方法和权限做耦合
-        // filterChainDefinitionMap.put("/admin/user/list", "perms[aaa]");
-    
-        filterChainDefinitionMap.put("/**", "anon");
-    
-        // 如果访问某个请求没有权限, shiro 会做重定向 -> 默认重定向地址是 /login.jsp
-        // 如果想要修改重定向地址, 可以使用
-        // filterFactoryBean.setLoginUrl("/admin/auth/login");
-        // 添加自定义过滤器(所有请求通过自定义的jwtFilter)
-        // 下面的代码是自定义jwt过滤器，请求执行顺序是shiro-->jwt过滤器-->内部请求
-        // 不大开下面代码，请求直接shiro-->内部请求
-        // anon,biaoshi所有人都能访问，不需要登录验证  /**匹配的是所有请求不包括前面单独零出来的
-        // 因为这是个chain，前面的先匹配 再匹配后面的代码（开发时可以注释掉下方，生产中放开）
-        /*HashMap<String, Filter> map = new HashMap<>(1);
-        map.put("jwt",new JwtFilter());
-        filterFactoryBean.setFilters(map);
-        filterChainDefinitionMap.put("/**","jwt");*/
+        // 配置过滤器链
+        Map<String, String> filterRuleMap = new LinkedHashMap<>();
+        // 允许匿名访问的接口
+        filterRuleMap.put("/auth/login", "anon");
+        filterRuleMap.put("/auth/register", "anon");
+        filterRuleMap.put("/auth/test", "jwt");  // 明确指定需要JWT验证的接口
+        // 其他所有请求通过JWT过滤器
+        filterRuleMap.put("/**", "jwt");
         
-        filterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
-    
+        filterFactoryBean.setFilterChainDefinitionMap(filterRuleMap);
         return filterFactoryBean;
     }
     
