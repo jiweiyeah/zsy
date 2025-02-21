@@ -22,7 +22,7 @@ public class TestPermissionController {
     // 超级管理员专属接口
     @RequiresRoles(RoleConstants.ROLE_SUPER_ADMIN)
     @RequiresPermissions(RoleConstants.PERMISSION_SYSTEM_CONFIG)
-    @PostMapping("/system/config")
+    @GetMapping("/system/config")
     public ResponseData systemConfig() {
         ResponseData response = new ResponseData();
         response.setSuccess(true);
@@ -33,7 +33,7 @@ public class TestPermissionController {
     // 管理员及以上角色可访问
     @RequiresRoles(value = {RoleConstants.ROLE_ADMIN, RoleConstants.ROLE_SUPER_ADMIN}, logical = Logical.OR)
     @RequiresPermissions(RoleConstants.PERMISSION_PROJECT_MANAGE)
-    @PutMapping("/project/manage")
+    @GetMapping("/project/manage")
     public ResponseData projectManage() {
         ResponseData response = new ResponseData();
         response.setSuccess(true);

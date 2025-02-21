@@ -28,15 +28,11 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
      */
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
-        // 检查是否有Authorization头
-        if (isLoginAttempt(request, response)) {
-            try {
-                return executeLogin(request, response);
-            } catch (Exception e) {
-                return false;
-            }
+        try {
+            return executeLogin(request, response);
+        } catch (Exception e) {
+            return false;
         }
-        return false; // 没有token就拒绝访问
     }
     
     /**
@@ -47,17 +43,22 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
     @Override
     protected boolean isLoginAttempt(ServletRequest request, ServletResponse response) {
         HttpServletRequest req = (HttpServletRequest) request;
-        String authorization = req.getHeader("Authorization");
-        return authorization != null;
+        String token = req.getHeader("Authorization");
+        return token != null && !token.isEmpty();
     }
     
     @Override
     protected boolean executeLogin(ServletRequest request, ServletResponse response) {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-        String authorization = httpServletRequest.getHeader("Authorization");
-        JwtToken token = new JwtToken(authorization);
+        String token = httpServletRequest.getHeader("Authorization");
+        
+        if (token == null || token.isEmpty()) {
+            return false;
+        }
+        
+        JwtToken jwtToken = new JwtToken(token);
         try {
-            getSubject(request, response).login(token);
+            getSubject(request, response).login(jwtToken);
             return true;
         } catch (Exception e) {
             return false;
@@ -81,7 +82,13 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
     @Override
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
         HttpServletResponse httpResponse = (HttpServletResponse) response;
-        httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        if (isLoginAttempt(request, response)) {
+            // Token存在但验证失败，返回403
+            httpResponse.setStatus(HttpStatus.FORBIDDEN.value());
+        } else {
+            // Token不存在，返回401
+            httpResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
+        }
         return false;
     }
     

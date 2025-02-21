@@ -57,13 +57,16 @@ public class ShiroConfiguration {
         filterRuleMap.put("/auth/login", "anon");
         filterRuleMap.put("/auth/register", "anon");
 
-        // 权限控制（新增部分）
-        filterRuleMap.put("/test/project/manage", "jwt, perms[PERMISSION_PROJECT_MANAGE]");
-        filterRuleMap.put("/test/system/config", "jwt, roles[ROLE_SUPER_ADMIN]");
+        // 权限控制
+        filterRuleMap.put("/test/project/manage", "jwt, roles[" + RoleConstants.ROLE_ADMIN + "], perms[" + RoleConstants.PERMISSION_PROJECT_MANAGE + "]");
+        filterRuleMap.put("/test/system/config", "jwt, roles[" + RoleConstants.ROLE_SUPER_ADMIN + "], perms[" + RoleConstants.PERMISSION_SYSTEM_CONFIG + "]");
+        filterRuleMap.put("/test/user/view", "jwt, perms[" + RoleConstants.PERMISSION_USER_VIEW + "]");
+        filterRuleMap.put("/test/user/edit", "jwt, perms[" + RoleConstants.PERMISSION_USER_EDIT + "]");
+        filterRuleMap.put("/test/user/delete", "jwt, perms[" + RoleConstants.PERMISSION_USER_DELETE + "]");
+        filterRuleMap.put("/test/data/export", "jwt, perms[" + RoleConstants.PERMISSION_DATA_EXPORT + "]");
 
-        // 所有测试接口都需要JWT验证
+        // 其他配置保持不变
         filterRuleMap.put("/test/**", "jwt");
-        // 其他所有请求通过JWT过滤器
         filterRuleMap.put("/**", "jwt");
         
         filterFactoryBean.setFilterChainDefinitionMap(filterRuleMap);
