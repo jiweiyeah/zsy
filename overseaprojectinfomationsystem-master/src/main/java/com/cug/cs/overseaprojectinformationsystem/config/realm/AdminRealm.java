@@ -8,12 +8,18 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import lombok.extern.slf4j.Slf4j;
 
 import com.cug.cs.overseaprojectinformationsystem.shiro.JwtToken;
 import com.cug.cs.overseaprojectinformationsystem.util.JwtUtil;
 import com.cug.cs.overseaprojectinformationsystem.constant.RoleConstants;
+import com.cug.cs.overseaprojectinformationsystem.entity.SystemRole;
+import com.cug.cs.overseaprojectinformationsystem.entity.SystemPermission;
+import com.cug.cs.overseaprojectinformationsystem.mapper.SystemRoleMapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import java.util.List;
 
 /**
  * @description: TODO 提供信息：授权信息与认证信息（管理员）
@@ -24,6 +30,9 @@ import com.cug.cs.overseaprojectinformationsystem.constant.RoleConstants;
 @Slf4j
 @Component
 public class AdminRealm extends AuthorizingRealm {
+    @Autowired
+    private SystemRoleMapper roleMapper;
+
     /*@Autowired
     MarketAdminMapper marketAdminMapper;
     @Autowired
@@ -96,15 +105,18 @@ public class AdminRealm extends AuthorizingRealm {
         String username = JwtUtil.getUsername(token);
         log.info("AdminRealm开始授权, 用户: {}", username);
         
+        // 从数据库获取角色和权限
+        SystemRole role = roleMapper.selectOne(
+            new QueryWrapper<SystemRole>().eq("name", RoleConstants.ROLE_ADMIN)
+        );
+        List<SystemPermission> permissions = roleMapper.getPermissionsByRoleId(role.getId());
+        
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        info.addRole(RoleConstants.ROLE_ADMIN);
-        info.addStringPermission(RoleConstants.PERMISSION_ADMIN_ALL);
-        info.addStringPermission(RoleConstants.PERMISSION_USER_VIEW);
-        info.addStringPermission(RoleConstants.PERMISSION_USER_EDIT);
-        info.addStringPermission(RoleConstants.PERMISSION_USER_DELETE);
+        info.addRole(role.getName());
+        permissions.forEach(p -> info.addStringPermission(p.getPermission()));
         
         log.info("AdminRealm授权完成, 用户: {}, 角色: {}, 权限: {}", 
-            username, RoleConstants.ROLE_ADMIN, info.getStringPermissions());
+            username, role.getName(), info.getStringPermissions());
         return info;
     }
 }

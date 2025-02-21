@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cug.cs.overseaprojectinformationsystem.mapper.SystemRoleMapper">
+    <select id="selectById" resultType="com.cug.cs.overseaprojectinformationsystem.entity.SystemRole">
+        SELECT id, name, `desc`, enabled, deleted
+        FROM system_role
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectByName" resultType="com.cug.cs.overseaprojectinformationsystem.entity.SystemRole">
+        SELECT id, name, `desc`, enabled, deleted
+        FROM system_role
+        WHERE name = #{name}
+    </select>
+
+    <select id="getPermissionsByRoleId" resultType="com.cug.cs.overseaprojectinformationsystem.entity.SystemPermission">
+        SELECT id, role_id as roleId, permission, deleted
+        FROM system_permission 
+        WHERE role_id = #{roleId}
+        AND deleted = 0
+    </select>
+</mapper> 

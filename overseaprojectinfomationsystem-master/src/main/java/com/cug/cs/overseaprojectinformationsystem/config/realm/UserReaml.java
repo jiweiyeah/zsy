@@ -78,7 +78,7 @@ public class UserReaml extends AuthorizingRealm {
     }
     
     @Override
-    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+    public AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         String token = (String) principals.getPrimaryPrincipal();
         String username = JwtUtil.getUsername(token);
         log.info("UserRealm开始授权, 用户: {}", username);
