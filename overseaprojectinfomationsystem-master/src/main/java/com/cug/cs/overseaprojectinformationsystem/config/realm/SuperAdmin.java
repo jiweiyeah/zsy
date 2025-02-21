@@ -80,7 +80,7 @@ public class SuperAdmin extends AuthorizingRealm {
         
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         info.addRole(RoleConstants.ROLE_SUPER_ADMIN);
-        info.addStringPermission(RoleConstants.PERMISSION_SUPER_ADMIN_ALL);
+        info.addStringPermission(RoleConstants.PERMISSION_ALL);
         
         log.info("SuperAdmin授权完成, 用户: {}, 角色: {}, 权限: {}", 
             username, RoleConstants.ROLE_SUPER_ADMIN, info.getStringPermissions());

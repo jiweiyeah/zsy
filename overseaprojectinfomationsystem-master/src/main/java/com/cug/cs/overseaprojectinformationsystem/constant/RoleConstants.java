@@ -1,13 +1,18 @@
 package com.cug.cs.overseaprojectinformationsystem.constant;
 
 public class RoleConstants {
+    // 角色定义
     public static final String ROLE_SUPER_ADMIN = "super_admin";
     public static final String ROLE_ADMIN = "admin";
     public static final String ROLE_USER = "user";
     
-    public static final String PERMISSION_USER_VIEW = "user:view";
-    public static final String PERMISSION_USER_EDIT = "user:edit";
-    public static final String PERMISSION_USER_DELETE = "user:delete";
-    public static final String PERMISSION_ADMIN_ALL = "admin:*";
-    public static final String PERMISSION_SUPER_ADMIN_ALL = "*:*";
+    // 权限定义
+    public static final String PERMISSION_ALL = "PERMISSION_ALL";
+    public static final String PERMISSION_ADMIN = "PERMISSION_ADMIN";
+    public static final String PERMISSION_USER_VIEW = "PERMISSION_USER_VIEW";
+    public static final String PERMISSION_USER_EDIT = "PERMISSION_USER_EDIT";
+    public static final String PERMISSION_USER_DELETE = "PERMISSION_USER_DELETE";
+    public static final String PERMISSION_PROJECT_MANAGE = "PERMISSION_PROJECT_MANAGE";
+    public static final String PERMISSION_DATA_EXPORT = "PERMISSION_DATA_EXPORT";
+    public static final String PERMISSION_SYSTEM_CONFIG = "PERMISSION_SYSTEM_CONFIG";
 } 
