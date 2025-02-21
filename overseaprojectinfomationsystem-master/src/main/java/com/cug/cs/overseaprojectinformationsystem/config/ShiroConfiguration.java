@@ -31,6 +31,8 @@ public class ShiroConfiguration {
     AuthorizingRealm adminRealm;
     @Autowired
     AuthorizingRealm userReaml;
+    @Autowired
+    AuthorizingRealm superAdmin;
     /**
      *  注册shiroFilter
      * @param securityManager
@@ -53,9 +55,8 @@ public class ShiroConfiguration {
         // 允许匿名访问的接口
         filterRuleMap.put("/auth/login", "anon");
         filterRuleMap.put("/auth/register", "anon");
-        // 需要角色验证的接口
-        filterRuleMap.put("/auth/admin/**", "jwt,roles[admin]");  // 添加角色验证
-        filterRuleMap.put("/auth/user/**", "jwt");  // 普通接口只需要验证token
+        // 所有测试接口都需要JWT验证
+        filterRuleMap.put("/test/**", "jwt");
         // 其他所有请求通过JWT过滤器
         filterRuleMap.put("/**", "jwt");
         
@@ -68,7 +69,7 @@ public class ShiroConfiguration {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         // 给 SecurityManager, 默认认证器, 默认授权器都设置了 Realms
         // securityManager.setRealms(Arrays.asList(realm));
-        securityManager.setRealms(Arrays.asList(adminRealm,userReaml));
+        securityManager.setRealms(Arrays.asList(adminRealm,userReaml,superAdmin));
         
         // 如果要使用自定义的认证器和授权器, 需要单独使用 set 方法, 还需要给自定义的认证器和授权器单独提供 Realms
         // securityManager.setAuthenticator();

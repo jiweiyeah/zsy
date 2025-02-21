@@ -77,9 +77,10 @@ public class TestPermissionControllerTest {
     
     @Test
     public void testUnauthorizedAccess() throws Exception {
-        // 测试未登录访问
+        System.out.println("Testing unauthorized access...");
         mockMvc.perform(get("/test/user/view"))
-                .andExpect(status().isUnauthorized());
+                .andExpect(status().isUnauthorized())
+                .andDo(result -> System.out.println("Response status: " + result.getResponse().getStatus()));
     }
     
     @Test 

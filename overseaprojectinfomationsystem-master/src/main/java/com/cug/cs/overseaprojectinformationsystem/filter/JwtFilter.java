@@ -28,16 +28,15 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
      */
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
+        // 检查是否有Authorization头
         if (isLoginAttempt(request, response)) {
             try {
                 return executeLogin(request, response);
             } catch (Exception e) {
-                responseError(response);
                 return false;
             }
         }
-        responseError(response);
-        return false;
+        return false; // 没有token就拒绝访问
     }
     
     /**
@@ -77,6 +76,13 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
             return false;
         }
         return super.preHandle(request, response);
+    }
+    
+    @Override
+    protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
+        HttpServletResponse httpResponse = (HttpServletResponse) response;
+        httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        return false;
     }
     
     private void responseError(ServletResponse response) {
