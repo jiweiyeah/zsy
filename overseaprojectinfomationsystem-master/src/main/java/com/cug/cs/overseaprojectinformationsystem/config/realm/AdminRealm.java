@@ -9,6 +9,7 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.stereotype.Component;
+import lombok.extern.slf4j.Slf4j;
 
 import com.cug.cs.overseaprojectinformationsystem.shiro.JwtToken;
 import com.cug.cs.overseaprojectinformationsystem.util.JwtUtil;
@@ -20,6 +21,7 @@ import com.cug.cs.overseaprojectinformationsystem.constant.RoleConstants;
  * @date: 2023-07-21  16:25
  */
 
+@Slf4j
 @Component
 public class AdminRealm extends AuthorizingRealm {
     /*@Autowired
@@ -36,27 +38,48 @@ public class AdminRealm extends AuthorizingRealm {
      */
     @Override
     public boolean supports(AuthenticationToken token) {
-        return token instanceof JwtToken;
+        boolean support = token instanceof JwtToken;
+        log.info("AdminRealm supports token: {}, result: {}", token.getClass(), support);
+        return support;
     }
 
     @Override
-    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+    public AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         String jwt = (String) token.getPrincipal();
+        log.info("AdminRealm开始验证token: {}", jwt);
+        
         if (jwt == null) {
+            log.error("AdminRealm验证失败: token为空");
             throw new AuthenticationException("token不能为空");
         }
         
-        // 验证JWT的有效性
         try {
             if (!JwtUtil.verify(jwt)) {
+                log.error("AdminRealm验证失败: token无效");
                 throw new AuthenticationException("token验证失败");
             }
+            
+            String role = JwtUtil.getRole(jwt);
+            log.info("AdminRealm当前用户角色: {}", role);
+            
+            if (!RoleConstants.ROLE_ADMIN.equals(role) && 
+                !RoleConstants.ROLE_SUPER_ADMIN.equals(role)) {
+                log.error("AdminRealm验证失败: 权限不足, 当前角色: {}", role);
+                throw new AuthenticationException("权限不足");
+            }
+            
             String username = JwtUtil.getUsername(jwt);
+            log.info("AdminRealm当前用户: {}", username);
+            
             if (username == null) {
+                log.error("AdminRealm验证失败: token中无用户信息");
                 throw new AuthenticationException("token中无用户信息");
             }
+            
+            log.info("AdminRealm验证成功, 用户: {}, 角色: {}", username, role);
             return new SimpleAuthenticationInfo(jwt, jwt, getName());
         } catch (Exception e) {
+            log.error("AdminRealm验证失败: {}", e.getMessage(), e);
             throw new AuthenticationException("token验证失败: " + e.getMessage());
         }
     }
@@ -70,23 +93,18 @@ public class AdminRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         String token = (String) principals.getPrimaryPrincipal();
-        String role = JwtUtil.getRole(token);
+        String username = JwtUtil.getUsername(token);
+        log.info("AdminRealm开始授权, 用户: {}", username);
         
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+        info.addRole(RoleConstants.ROLE_ADMIN);
+        info.addStringPermission(RoleConstants.PERMISSION_ADMIN_ALL);
+        info.addStringPermission(RoleConstants.PERMISSION_USER_VIEW);
+        info.addStringPermission(RoleConstants.PERMISSION_USER_EDIT);
+        info.addStringPermission(RoleConstants.PERMISSION_USER_DELETE);
         
-        if (RoleConstants.ROLE_ADMIN.equals(role)) {
-            // 管理员角色
-            info.addRole(RoleConstants.ROLE_ADMIN);
-            info.addStringPermission(RoleConstants.PERMISSION_ADMIN_ALL);
-            info.addStringPermission(RoleConstants.PERMISSION_USER_VIEW);
-            info.addStringPermission(RoleConstants.PERMISSION_USER_EDIT);
-            info.addStringPermission(RoleConstants.PERMISSION_USER_DELETE);
-        } else if (RoleConstants.ROLE_USER.equals(role)) {
-            // 普通用户角色
-            info.addRole(RoleConstants.ROLE_USER);
-            info.addStringPermission(RoleConstants.PERMISSION_USER_VIEW);
-        }
-        
+        log.info("AdminRealm授权完成, 用户: {}, 角色: {}, 权限: {}", 
+            username, RoleConstants.ROLE_ADMIN, info.getStringPermissions());
         return info;
     }
 }
