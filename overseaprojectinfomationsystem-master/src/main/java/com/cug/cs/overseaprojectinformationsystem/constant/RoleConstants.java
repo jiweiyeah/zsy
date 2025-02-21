@@ -2,9 +2,9 @@ package com.cug.cs.overseaprojectinformationsystem.constant;
 
 public class RoleConstants {
     // 角色定义
-    public static final String ROLE_SUPER_ADMIN = "super_admin";
-    public static final String ROLE_ADMIN = "admin";
-    public static final String ROLE_USER = "user";
+    public static final String ROLE_SUPER_ADMIN = "ROLE_SUPER_ADMIN";
+    public static final String ROLE_ADMIN = "ROLE_ADMIN";
+    public static final String ROLE_USER = "ROLE_USER";
     
     // 权限定义
     public static final String PERMISSION_ALL = "PERMISSION_ALL";

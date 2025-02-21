@@ -107,13 +107,16 @@ public class AdminRealm extends AuthorizingRealm {
         
         // 从数据库获取角色和权限
         SystemRole role = roleMapper.selectOne(
-            new QueryWrapper<SystemRole>().eq("name", RoleConstants.ROLE_ADMIN)
+            new QueryWrapper<SystemRole>().eq("name", "ROLE_ADMIN")
         );
         List<SystemPermission> permissions = roleMapper.getPermissionsByRoleId(role.getId());
         
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         info.addRole(role.getName());
         permissions.forEach(p -> info.addStringPermission(p.getPermission()));
+        
+        // 确保管理员有项目管理权限
+        info.addStringPermission(RoleConstants.PERMISSION_PROJECT_MANAGE);
         
         log.info("AdminRealm授权完成, 用户: {}, 角色: {}, 权限: {}", 
             username, role.getName(), info.getStringPermissions());

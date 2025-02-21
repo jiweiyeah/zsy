@@ -2,6 +2,7 @@ package com.cug.cs.overseaprojectinformationsystem.config;
 
 import com.cug.cs.overseaprojectinformationsystem.config.realm.AdminRealm;
 import com.cug.cs.overseaprojectinformationsystem.config.realm.UserReaml;
+import com.cug.cs.overseaprojectinformationsystem.constant.RoleConstants;
 import com.cug.cs.overseaprojectinformationsystem.filter.JwtFilter;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
@@ -55,6 +56,11 @@ public class ShiroConfiguration {
         // 允许匿名访问的接口
         filterRuleMap.put("/auth/login", "anon");
         filterRuleMap.put("/auth/register", "anon");
+
+        // 权限控制（新增部分）
+        filterRuleMap.put("/test/project/manage", "jwt, perms[PERMISSION_PROJECT_MANAGE]");
+        filterRuleMap.put("/test/system/config", "jwt, roles[ROLE_SUPER_ADMIN]");
+
         // 所有测试接口都需要JWT验证
         filterRuleMap.put("/test/**", "jwt");
         // 其他所有请求通过JWT过滤器
